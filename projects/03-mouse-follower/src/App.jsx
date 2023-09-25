@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 
-const  FollowMouse = () => {
-  const [enable, setEnable] = useState(false);
-  const [position, setPosition] = useState({x: 0, y: 0});
+const FollowMouse = () => {
+  const [enable, setEnable] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-
-    const handleMouse = (event) =>{
-      const {clientX, clientY} = event;
-      setPosition({x: clientX, y: clientY});
+    const handleMouse = (event) => {
+      const { clientX, clientY } = event
+      setPosition({ x: clientX, y: clientY })
     }
-    if(enable)
-      window.addEventListener('mousemove', handleMouse);
+    if (enable) {
+      window.addEventListener('mousemove', handleMouse)
+    }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouse);
-      setPosition({x:0, y:0});
+      window.removeEventListener('mousemove', handleMouse)
+      setPosition({ x: 0, y: 0 })
     }
   }, [enable])
   return (
@@ -31,21 +31,21 @@ const  FollowMouse = () => {
         width: 40,
         height: 40,
         transform: `translate(${position.x}px, ${position.y}px)`
-      }} />
+      }}
+      />
       <button onClick={() => setEnable(!enable)}>{enable ? 'Desactivar' : 'Activar'} seguir puntero</button>
     </main>
   )
 }
 
-
-function App() {
-  const [showButton, setShowButton] = useState(false);
+function App () {
+  const [showButton, setShowButton] = useState(false)
   return (
-          <>
-          { showButton && <FollowMouse/> }
-          <button onClick={() => setShowButton(!showButton)}>{showButton ? 'Ocultar' : 'Mostrar'} boton</button>
-          </>
-        )
+    <>
+      {showButton && <FollowMouse />}
+      <button onClick={() => setShowButton(!showButton)}>{showButton ? 'Ocultar' : 'Mostrar'} boton</button>
+    </>
+  )
 }
 
 export default App
